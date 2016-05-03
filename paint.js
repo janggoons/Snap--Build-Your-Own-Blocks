@@ -5,7 +5,7 @@
     inspired by the Scratch paint editor.
 
     written by Kartik Chandra
-    Copyright (C) 2014 by Kartik Chandra
+    Copyright (C) 2016 by Kartik Chandra
 
     This file is part of Snap!.
 
@@ -57,19 +57,22 @@
     June 4 - tweaks (Jens)
     Aug 24 - floodfill alpha-integer issue (Kartik)
     Sep 29 - tweaks (Jens)
- */
+    Sep 28 [of the following year :)] - Try to prevent antialiasing (Kartik)
+    Oct 02 - revert disable smoothing (Jens)
+    Dec 15 - center rotation point on costume creating (Craxic)
+    Jan 18 - avoid pixel collision detection in PaintCanvas (Jens)
+    Mar 22 - fixed automatic rotation center point mechanism (Jens)
+*/
 
-/*global Point, Rectangle, DialogBoxMorph, fontHeight, AlignmentMorph,
- FrameMorph, PushButtonMorph, Color, SymbolMorph, newCanvas, Morph, TextMorph,
- CostumeIconMorph, IDE_Morph, Costume, SpriteMorph, nop, Image, WardrobeMorph,
- TurtleIconMorph, localize, MenuMorph, InputFieldMorph, SliderMorph,
- ToggleMorph, ToggleButtonMorph, BoxMorph, modules, radians,
- MorphicPreferences, getDocumentPositionOf, StageMorph
- */
+/*global Point, Rectangle, DialogBoxMorph, AlignmentMorph, PushButtonMorph,
+Color, SymbolMorph, newCanvas, Morph, TextMorph, Costume, SpriteMorph, nop,
+localize, InputFieldMorph, SliderMorph, ToggleMorph, ToggleButtonMorph,
+BoxMorph, modules, radians, MorphicPreferences, getDocumentPositionOf,
+StageMorph, isNil*/
 
 // Global stuff ////////////////////////////////////////////////////////
 
-modules.paint = '2014-September-29';
+modules.paint = '2016-May-02';
 
 // Declarations
 
@@ -249,7 +252,6 @@ PaintEditorMorph.prototype.buildScaleBox = function () {
 PaintEditorMorph.prototype.openIn = function (world, oldim, oldrc, callback) {
     // Open the editor in a world with an optional image to edit
     this.oldim = oldim;
-    this.oldrc = oldrc.copy();
     this.callback = callback || nop;
 
     this.processKeyUp = function () {
@@ -264,9 +266,10 @@ PaintEditorMorph.prototype.openIn = function (world, oldim, oldrc, callback) {
 
     //merge oldim:
     if (this.oldim) {
+        this.paper.automaticCrosshairs = isNil(oldrc);
         this.paper.centermerge(this.oldim, this.paper.paper);
         this.paper.rotationCenter =
-            this.oldrc.add(
+            (oldrc || new Point(0, 0)).add(
                 new Point(
                     (this.paper.paper.width - this.oldim.width) / 2,
                     (this.paper.paper.height - this.oldim.height) / 2
@@ -305,6 +308,7 @@ PaintEditorMorph.prototype.refreshToolButtons = function () {
 };
 
 PaintEditorMorph.prototype.ok = function () {
+    this.paper.updateAutomaticCenter();
     this.callback(
         this.paper.paper,
         this.paper.rotationCenter
@@ -583,10 +587,36 @@ PaintCanvasMorph.prototype.init = function (shift) {
         var key = this.world().currentKey;
         return (key === 16);
     };
+    // should we calculate the center of the image ourselves,
+    // or use the user position
+    this.automaticCrosshairs = true;
+    this.noticesTransparentClick = true; // optimization
     this.buildContents();
 };
 
+// Calculate the center of all the non-transparent pixels on the canvas.
+PaintCanvasMorph.prototype.calculateCanvasCenter = function(canvas) {
+    var canvasBounds = Costume.prototype.canvasBoundingBox(canvas);
+    if (canvasBounds === null) {
+        return null;
+    }
+    // Can't use canvasBounds.center(), it rounds down.
+    return new Point((canvasBounds.origin.x + canvasBounds.corner.x) / 2, (canvasBounds.origin.y + canvasBounds.corner.y) / 2);
+};
+
+// If we are in automaticCrosshairs mode, recalculate the rotationCenter.
+PaintCanvasMorph.prototype.updateAutomaticCenter = function () {
+    if (this.automaticCrosshairs) {
+        // Calculate this.rotationCenter from this.paper
+        var rotationCenter = this.calculateCanvasCenter(this.paper);
+        if (rotationCenter !== null) {
+            this.rotationCenter = rotationCenter;
+        }
+    }
+};
+
 PaintCanvasMorph.prototype.scale = function (x, y) {
+    this.updateAutomaticCenter();
     this.mask = newCanvas(this.extent());
     var c = newCanvas(this.extent());
     c.getContext("2d").save();
@@ -643,6 +673,7 @@ PaintCanvasMorph.prototype.clearCanvas = function () {
 PaintCanvasMorph.prototype.toolChanged = function (tool) {
     this.mask = newCanvas(this.extent());
     if (tool === "crosshairs") {
+        this.updateAutomaticCenter();
         this.drawcrosshair();
     }
     this.drawNew();
@@ -906,6 +937,8 @@ PaintCanvasMorph.prototype.mouseMove = function (pos) {
         }
         break;
     case "crosshairs":
+        // Disable automatic crosshairs: user has now chosen where they should be.
+        this.automaticCrosshairs = false;
         this.rotationCenter = relpos.copy();
         this.drawcrosshair(mctx);
         break;

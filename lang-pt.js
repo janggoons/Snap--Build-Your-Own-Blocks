@@ -6,7 +6,7 @@
 
     translated by Manuel Menezes de Sequeira
 
-    Copyright (C) 2012 by Manuel Menezes de Sequeira
+    Copyright (C) 2016 by Manuel Menezes de Sequeira
 
     This file is part of Snap!.
 
@@ -185,7 +185,7 @@ SnapTranslator.dict.pt = {
     'translator_e-mail':
         'mmsequeira@gmail.com',
     'last_changed':
-        '2014-10-01',
+        '2016-04-06',
 
     // GUI
     // control bar:
@@ -411,14 +411,28 @@ SnapTranslator.dict.pt = {
         'altera a espessura da tua caneta para %n',
     'stamp':
         'carimba-te',
+    'fill':
+        'enche o palco',
 
     // controlo:
     'when %greenflag clicked':
         'Quando alguém clicar em %greenflag',
     'when %keyHat key pressed':
         'Quando alguém pressionar a tecla %keyHat',
-    'when I am clicked':
-        'Quando alguém clicar em ti',
+    'when I am %interaction':
+        'Quando o rato %interaction',
+    'clicked':
+        'clicar em ti',
+    'pressed':
+        'pressionar em ti',
+    'dropped':
+        'te largar',
+    'mouse-entered':
+        'entrar em ti',
+    'mouse-departed':
+        'sair de ti',
+    'when %b':
+        'Quando %b',
     'when I receive %msgHat':
         'Quando receberes a mensagem %msgHat',
     'broadcast %msg':
@@ -647,13 +661,17 @@ SnapTranslator.dict.pt = {
         'Abrir um projecto…',
     'Save':
         'Guardar este projecto',
+    'Save to disk':
+        'Guardar no disco',
+    'store this project\nin the downloads folder\n(in supporting browsers)':
+        'Guardar este projecto\nna sua pasta de descargas\n'
+            + '(em navegadores que o suportem).',
     'Save As...':
         'Guardar este projecto como…',
     'Import...':
         'Importar…',
     'file menu import hint':
-        'Abrir um projecto exportado,\n'
-            + 'substitundo o projecto corrente, ou\n'
+        'Abrir um projecto exportado,\nsubstitundo o projecto corrente, ou\n'
             + 'importar uma biblioteca de blocos, um\n'
             + 'traje ou um som para o projecto corrente.',
     'Export project as plain text...':
@@ -666,6 +684,33 @@ SnapTranslator.dict.pt = {
         'Exportar blocos deste projecto…',
     'show global custom block definitions as XML\nin a new browser window':
         'Mostrar as definições de blocos\npersonalizados globais no formato\nXML numa nova janela do navegador.',
+    'Unused blocks...':
+          'Blocos não usados…',
+    'find unused global custom blocks\nand remove their definitions':
+        'Procurar os blocos personalizados globais\nnão usados e remover as suas definições',
+    'Remove unused blocks':
+        'Remover blocos não usados',
+    'there are currently no unused\nglobal custom blocks in this project':
+        'de momento não há blocos personalizados\nglobais não usados neste projecto',
+    'unused block(s) removed':
+        'blocos não usados removidos',
+    'Export summary...':
+        'Exportar resumo…',
+    'open a new browser browser window\n with a summary of this project':
+        'Abrir uma nova janela no navegador\ncontendo um resumo deste projecto',
+
+    'Contents':
+        'Índice',
+    'Kind of':
+        'Do tipo de',
+    'Part of':
+        'Uma parte de',
+    'Parts':
+        'Partes',
+    'Blocks':
+        'Blocos',
+    'For all Sprites':
+        'Para todos os Actores',
     'Import tools':
         'Importar as ferramentas oficiais para este projecto',
     'load the official library of\npowerful blocks':
@@ -766,6 +811,14 @@ SnapTranslator.dict.pt = {
         'Desssinalar para executar os guiões\nà velocidade normal.',
     'check to enable\nIDE animations':
         'Assinalar para activar\nas animações do AID',
+    'Flat design':
+        'Design plano',
+    'Keyboard Editing':
+        'Edição usando o teclado',
+    'Table support':
+        'Suporte de tabelas',
+    'Table lines':
+        'Tabelas com linhas',
     'Thread safe scripts':
         'Guiões seguros face a threads',
     'uncheck to allow\nscript reentrance':
@@ -784,6 +837,8 @@ SnapTranslator.dict.pt = {
         'Assinalar para que os extremos das linhas\ndesenhadas pela caneta sejam planos.',
     'uncheck for round ends of lines':
         'Desassinalar para que os extremos das linhas\ndesenhadas pela caneta sejam redondos.',
+    'Inheritance support':
+        'Suporte para herança',
 
     // entradas
     'with inputs':
@@ -826,6 +881,12 @@ SnapTranslator.dict.pt = {
         'adicionar anel',
     'unringify':
         'remover anel',
+    'transient':
+        'transiente',
+    'uncheck to save contents\nin the project':
+        'Desassinalar para guardar\no conteúdo no projecto',
+    'check to prevent contents\nfrom being saved':
+        'Assinalar para não guardar\no conteúdo no projecto',
 
     // blocos personalizados:
     'delete block definition...':
@@ -890,6 +951,18 @@ SnapTranslator.dict.pt = {
         'Tocar',
     'rename sound':
         'Qual o novo nome do som?',
+
+    // lists and tables
+    'list view...':
+        'vista de lista…',
+    'table view...':
+        'vista de tabela…',
+    'open in dialog...':
+        'abrir em caixa de diálogo…',
+    'reset columns':
+        'reiniciar colunas',
+    'items':
+        'itens',
 
     // caixas de diálogo
     // botões
@@ -1147,6 +1220,8 @@ SnapTranslator.dict.pt = {
         'seta para a direita',
     'left arrow':
         'seta para a esquerda',
+    'any key':
+        'qualquer',
     'a':
         'a',
     'b':
@@ -1227,6 +1302,8 @@ SnapTranslator.dict.pt = {
     // funções matemáticas
     'abs':
         'o valor absoluto',
+    'ceiling':
+        'o arredondamento para cima',
     'floor':
         'o arredondamento para baixo',
     'sqrt':
@@ -1443,10 +1520,6 @@ SnapTranslator.dict.pt = {
         'Suportar produção de código',
     'check for block\nto text mapping features':
         'Assinalar para funcionalidades\nde mapeamento entre blocos e texto.',
-    'Save to disk':
-        'Guardar no disco',
-    'experimental - store this project\nin your downloads folder':
-        'Experimental - Guardar este projecto\nna sua pasta de descargas.',
     'saved.':
         'guardado.',
     'options...':
@@ -1463,8 +1536,6 @@ SnapTranslator.dict.pt = {
         'Pintar um novo traje.',
     'add a new Turtle sprite':
         'Adicionar um novo actor.',
-    'Flat design':
-        'Design plano',
     'check for alternative\nGUI design':
         'Assinalar para um design alternativo\nda interface gráfica com o utilizador.',
     'Rasterize SVGs':
@@ -1654,6 +1725,65 @@ SnapTranslator.dict.pt = {
         'esperavam-se',
     'input(s), but getting':
         'argumento(s), mas foram passados',
+    'parent...':
+        'pai…',
+    'current parent':
+        'pai actual',
+    'Dragging threshold...':
+        'Limiar de arrastamento…',
+    'Cache Inputs':
+        'Memorizar entradas',
+    'uncheck to stop caching\ninputs (for debugging the evaluator)':
+        'Desassinalar para parar de memorizar\nentradas (para depurar o avaliador).',
+    'check to cache inputs\nboosts recursion':
+        'Assinalar para memorizar as entradas\n(acelera recursividade).',
+    'Project URLs':
+        'URL de projecto',
+    'check to enable\nproject data in URLs':
+        'Assinalar para activar dados\ndo projecto nos URL.',
+    'uncheck to disable\nproject data in URLs':
+        'Desassinalar para desactivar\ndados do projecto nos URL.',
+    'export project media only...':
+        'Exportar apenas os média do projecto…',
+    'export project without media...':
+        'Exportar projecto sem os média…',
+    'export project as cloud data...':
+        'Exportar projecto como dados da nuvem…',
+    'open shared project from cloud...':
+        'Abrir projecto partilhado a partir da nuvem…',
+    'url...':
+        'URL…',
+    'Export summary with drop-shadows...':
+        'Exportar resumo com sombreamento…',
+    'open a new browser browser window\nwith a summary of this project\nwith drop-shadows on all pictures.\nnot supported by all browsers':
+        'Abrir uma nova janela no navegador\ncontendo um resumo deste projecto\n'
+        + 'com sombreamento em todas as imagens\n(não suportado em todos os navegadores)',
+    'specify the distance the hand has to move\nbefore it picks up an object':
+        'Especificar a distância que mão tem de se\nmover antes de agarrar algum objecto',
+    'block variables...':
+        'adicionar variáveis de bloco…',
+    'remove block variables...':
+        'remover variáveis de bloco…',
+    'block variables':
+        'com variáveis de bloco',
+    'experimental -\nunder construction':
+        'Experimental – em construção',
+    'Table view':
+        'Vista de tabela',
+    'open in another dialog...':
+        'abrir noutra caixa de diálogo…',
+    'check for multi-column\nlist view support':
+        'Assinalar para suporte de\nvistas multicoluna de listas.',
+    'uncheck to disable\nmulti-column list views':
+        'Desassinalar para desactivar\nvistas multicoluna de listas.',
+    'check for higher contrast\ntable views':
+        'Assinalar para vistas de\ntabela com maior contraste.',
+    'uncheck for less contrast\nmulti-column list views':
+        'Desassinalar para vistas multicoluna\nde listas com menor contraste.',
+    '(in a new window)':
+        '(numa nova janela)',
+    'save project data as XML\nto your downloads folder':
+        'Guardar dados do projecto como XML\nna sua pasta de descarregamentos.',
 
     // produção de código
     'map %cmdRing to %codeKind %code':
@@ -1692,5 +1822,15 @@ SnapTranslator.dict.pt = {
             + 'nomes para os parâmetros (ignorando os nomes mostrados).',
     'Enter code that corresponds to the block\'s operation (usually a single\nfunction invocation). Use <#n> to reference actual arguments as shown.':
         'Introduza o código que corresponda à operação do bloco (normalmente uma simples\n'
-            + 'invocação de rotina). Use <#n> para referenciar os argumentos tal como mostrado'
+            + 'invocação de rotina). Use <#n> para referenciar os argumentos tal como mostrado',
+    'uncheck to disable\nkeyboard editing support':
+        'Desassinalar para desactivar\na edição usando o teclado.',
+    'check to enable\nkeyboard editing support':
+        'Assinalar para activar\na edição usando o teclado.',
+    'Inheritance support':
+        'Suporte para herança',
+    'uncheck to disable\nsprite inheritance features':
+        'Desassinalar para desactivar\nfuncionalidades de herança de actores.',
+    'check for sprite\ninheritance features':
+        'Assinalar para activar\nfuncionalidades de herança de actores.'
 };

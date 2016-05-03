@@ -7,7 +7,7 @@
     written by Jens Mönig
     jens@moenig.org
 
-    Copyright (C) 2014 by Jens Mönig
+    Copyright (C) 2015 by Jens Mönig
 
     This file is part of Snap!.
 
@@ -74,7 +74,7 @@ HTMLCanvasElement, fontHeight, SymbolMorph, localize, SpeechBubbleMorph,
 ArrowMorph, MenuMorph, isString, isNil, SliderMorph, MorphicPreferences,
 ScrollFrameMorph*/
 
-modules.widgets = '2014-February-13';
+modules.widgets = '2016-May-02';
 
 var PushButtonMorph;
 var ToggleButtonMorph;
@@ -560,12 +560,13 @@ ToggleButtonMorph.prototype.init = function (
 // ToggleButtonMorph events
 
 ToggleButtonMorph.prototype.mouseEnter = function () {
+    var contents = this.hint instanceof Function ? this.hint() : this.hint;
     if (!this.state) {
         this.image = this.highlightImage;
         this.changed();
     }
-    if (this.hint) {
-        this.bubbleHelp(this.hint);
+    if (contents) {
+        this.bubbleHelp(contents);
     }
 };
 
@@ -2512,6 +2513,12 @@ DialogBoxMorph.prototype.fixLayout = function () {
                     + this.buttons.height()
                     + this.padding
         );
+        this.silentSetWidth(Math.max(
+                this.width(),
+                this.buttons.width()
+                        + (2 * this.padding)
+            )
+        );
         this.buttons.setCenter(this.center());
         this.buttons.setBottom(this.bottom() - this.padding);
     }
@@ -2926,6 +2933,7 @@ AlignmentMorph.prototype.fixLayout = function () {
                         ))
                     );
                 }
+                cfb = c.fullBounds();
                 newBounds = newBounds.merge(cfb);
             } else {
                 newBounds = cfb;
